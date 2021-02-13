@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,11 +17,11 @@ namespace DataAccess.Concrete.Inmemory
         {
             _cars = new List<Car>
             {
-                new Car{CarId =1, ColorId=1, BrandId=1, DailyPrice =70000, ModelYear =1996, Description="Benzinli"},
-                new Car{CarId =2, ColorId=1, BrandId=1, DailyPrice =85000, ModelYear =2000, Description="Benzinli"},
-                new Car{CarId =3, ColorId=4, BrandId=2, DailyPrice =780000, ModelYear =2002, Description="Dizel"},
-                new Car{CarId =4, ColorId=2, BrandId=2, DailyPrice =650000, ModelYear =2010, Description="Benzinli"},
-                new Car{CarId =5, ColorId=3, BrandId=1, DailyPrice =170000, ModelYear =2020, Description="Elektrikli"},
+                new Car{CarId =1, ColorId=1, BrandId=1, DailyPrice =70000, ModelYear =1996, Descriptions= "Benzinli"},
+                new Car{CarId =2, ColorId=1, BrandId=1, DailyPrice =85000, ModelYear =2000, Descriptions="Benzinli"},
+                new Car{CarId =3, ColorId=4, BrandId=2, DailyPrice =780000, ModelYear =2002, Descriptions="Dizel"},
+                new Car{CarId =4, ColorId=2, BrandId=2, DailyPrice =650000, ModelYear =2010, Descriptions="Benzinli"},
+                new Car{CarId =5, ColorId=3, BrandId=1, DailyPrice =170000, ModelYear =2020, Descriptions="Elektrikli"},
             };
         }
 
@@ -34,7 +35,16 @@ namespace DataAccess.Concrete.Inmemory
             return _cars.Where(c => c.CarId == Id).ToList();
         }
 
-        
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Add(Car car)
         {
@@ -54,7 +64,7 @@ namespace DataAccess.Concrete.Inmemory
             carOfUpdate.BrandId = car.BrandId;
             carOfUpdate.ColorId = car.ColorId;
             carOfUpdate.DailyPrice = car.DailyPrice;
-            carOfUpdate.Description = car.Description;
+            carOfUpdate.Descriptions = car.Descriptions;
             carOfUpdate.ModelYear = car.ModelYear;
         }
     }
