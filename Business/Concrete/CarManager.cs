@@ -22,6 +22,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
+            if (DateTime.Now.Hour == 19)
+            {
+                return new ErrorDataResult<List<Car>>(_carDal.GetAll(), Messages.NotMakeSucces);
+            }
 
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.MakeSuccess);
         }
