@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.Win32.SafeHandles;
 
 namespace DataAccess.Concrete.Inmemory
@@ -66,6 +67,11 @@ namespace DataAccess.Concrete.Inmemory
             carOfUpdate.DailyPrice = car.DailyPrice;
             carOfUpdate.Descriptions = car.Descriptions;
             carOfUpdate.ModelYear = car.ModelYear;
+        }
+
+        public List<CarDetailDto> getCarDetail()
+        {
+            throw new NotImplementedException();
         }
     }
 }
