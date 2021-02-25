@@ -11,7 +11,7 @@ namespace Business.ValidationRules.FluentValidation
 
         public CustomerValidator()
         {
-            RuleFor(p => p.CompanyName).NotNull().WithMessage("Şirket ismi boş olmamalıdır");
+            RuleFor(p => p.CompanyName).NotNull().WithMessage("Şirket isminiz boş olmamalıdır");
         }
 
     }
