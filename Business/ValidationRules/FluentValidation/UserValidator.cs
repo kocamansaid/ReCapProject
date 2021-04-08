@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using FluentValidation;
 
@@ -10,7 +11,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(p => p.Password).MinimumLength(8).WithMessage("Şifreniz en az sekiz karakter olmalıdır");
+            RuleFor(p => p.FirstName).MinimumLength(8).WithMessage("Şifreniz en az sekiz karakter olmalıdır");
             
 
 

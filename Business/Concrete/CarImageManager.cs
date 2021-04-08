@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Utilities.Helper;
 using Core.Utilities.Results;
@@ -27,8 +30,8 @@ namespace Business.Concrete
                 _carImageDal = carImageDal;
             }
 
-            //[ValidationAspect(typeof(CarImageValidator))]
-            //[SecuredOperation("admin")]
+            [ValidationAspect(typeof(CarImageValidator))]
+            [SecuredOperation("admin")]
             public IResult Add(CarImage carImage, IFormFile file)
             {
                 IResult result = BusinessRules.Run(CheckImageLimited(carImage.CarId));
@@ -82,7 +85,7 @@ namespace Business.Concrete
                 return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(p => p.CarId == CarId));
             }
 
-            //[ValidationAspect(typeof(CarImageValidator))]
+            [ValidationAspect(typeof(CarImageValidator))]
             public IResult Update(CarImage carImage, IFormFile file)
             {
                 var oldPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\wwwroot")) + _carImageDal.Get(p => p.Id == carImage.CarId).ImagePath;
