@@ -7,6 +7,7 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Utilities.Helper;
@@ -29,9 +30,9 @@ namespace Business.Concrete
             {
                 _carImageDal = carImageDal;
             }
-
+            [CacheAspect()]
             [ValidationAspect(typeof(CarImageValidator))]
-            [SecuredOperation("admin")]
+            [SecuredOperation("admin,moderator,user")]
             public IResult Add(CarImage carImage, IFormFile file)
             {
                 IResult result = BusinessRules.Run(CheckImageLimited(carImage.CarId));
@@ -66,7 +67,7 @@ namespace Business.Concrete
             {
                 return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == id));
             }
-
+            [CacheAspect]
             public IDataResult<List<CarImage>> GetAll()
             {
                 return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.CarImagesListed);

@@ -5,6 +5,8 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -43,6 +45,8 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CarValidator))]
         [SecuredOperation("admin")]
+        [PerformanceAspect(5)]
+        
         public IResult Add(Car car)
         {
             
@@ -73,6 +77,19 @@ namespace Business.Concrete
         {
 
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.getCarDetail(), Messages.MakeSuccess);
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if (car.ColorId == 3)
+            {
+                throw new Exception("lsdvnkds");
+            }
+            Add(car);
+
+            return null;
         }
     }
 }

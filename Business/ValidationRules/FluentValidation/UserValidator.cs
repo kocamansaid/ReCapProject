@@ -11,7 +11,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(p => p.FirstName).MinimumLength(8).WithMessage("Şifreniz en az sekiz karakter olmalıdır");
+            //RuleFor(p => p.FirstName).MinimumLength(8).WithMessage("Şifreniz en az sekiz karakter olmalıdır");
             
 
 

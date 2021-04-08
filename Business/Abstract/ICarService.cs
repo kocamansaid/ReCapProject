@@ -13,7 +13,7 @@ namespace Business.Abstract
         IDataResult<List<Car>> GetAll();
 
         IDataResult<Car> GetById(int id);
-
+        IResult AddTransactionalTest(Car car);
         IResult Add(Car car);
         IResult Update(Car car);
         IResult Delete(Car car);
